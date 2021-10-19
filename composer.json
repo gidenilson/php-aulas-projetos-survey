@@ -1,0 +1,18 @@
+{
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "name": "gidenilson/survey",
+    "description": "Aplicativo de votação simples.",
+    "authors": [
+        {
+            "name": "Gidenilson Santiago",
+            "email": "gidenilson@gmail.com"
+        }
+    ],
+    "require": {
+        "bramus/router": "^1.6"
+    }
+}
