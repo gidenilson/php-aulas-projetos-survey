@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Survey;
 
 class HomeController
 {
@@ -9,8 +10,9 @@ class HomeController
     public function index()
     {
 
-         header('Content-Type: application/json');
-         echo json_encode($_REQUEST);
+        $surveys = Survey::all();
+        header('Content-Type: application/json');
+         echo json_encode($surveys);
          
     }
 

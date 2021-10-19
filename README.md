@@ -7,3 +7,7 @@
 ### Arquivo raiz "index.php"
 ### Testando rotas
 ### Primeiro controller de teste
+
+## Base de dados
+### Instalação Eloquente ORM
+### Criação dos Models

@@ -2,7 +2,27 @@
 
 require __DIR__ . "../../vendor/autoload.php";
 
-session_start();
+use Illuminate\Database\Capsule\Manager as Capsule;
+
+$db = new Capsule;
+
+$db->addConnection([
+    'driver' => 'sqlite',
+    //'host' => 'localhost',
+    'database' => __DIR__ . "../../database.sqlite3",
+    //'username' => 'root',
+    //'password' => 'password',
+    'charset' => 'utf8',
+    'collation' => 'utf8_unicode_ci',
+    'prefix' => ''
+]);
+
+// Make this Capsule instance available globally via static methods
+$db->setAsGlobal();
+
+
+// Setup the Eloquent ORM...
+$db->bootEloquent();
 
 // Create Router instance
 $router = new \Bramus\Router\Router();
