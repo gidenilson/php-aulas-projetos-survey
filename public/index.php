@@ -2,11 +2,6 @@
 
 require __DIR__ . "../../vendor/autoload.php";
 
-// Instanciamento do router
-$router = new \Bramus\Router\Router();
+header('Content-Type: application/json');
 
-// Definição das rotas
-$router->get('/', 'App\Controllers\HomeController@index');
-
-// Roda o router!
-$router->run();
+echo json_encode($_REQUEST);
