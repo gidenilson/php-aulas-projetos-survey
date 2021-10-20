@@ -1,27 +1,26 @@
-Inicialização do projeto com o composer
+Instalação do "Bramus\Router"
 
-Configuração no namespace PSR-4 no composer.json
+Primeiro controller
 
+src/Controllers/HomeController.php
+
+<?php
+
+namespace App\Controllers;
+
+class HomeController
 {
-    "autoload": {
-        "psr-4": {
-            "App\\": "src/"
-        }
-    },
-    "name": "gidenilson/survey",
-    "description": "Aplicativo de votação simples.",
-    "authors": [
-        {
-            "name": "Gidenilson Santiago",
-            "email": "gidenilson@gmail.com"
-        }
-    ],
-    "require": {
-        "bramus/router": "^1.6"
+    public function index()
+    {
+
+        header('Content-Type: application/json');
+        echo json_encode($_REQUEST);
+
     }
+
 }
 
-Arquivo public/index.php
+Definição da rota no public\index.php
 
 <?php
 
@@ -35,3 +34,4 @@ $router->get('/', 'App\Controllers\HomeController@index');
 
 // Roda o router!
 $router->run();
+
