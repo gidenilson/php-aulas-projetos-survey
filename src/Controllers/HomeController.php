@@ -16,8 +16,4 @@ class HomeController
          
     }
 
-    public function login($password){
-        $_SESSION['authorize'] = true;
-        $_SESSION['password'] = $password;
-    }
 }

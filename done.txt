@@ -1,0 +1,3 @@
+Instalação do Eloquent ORM
+Criação da base de dados sqlite
+Criação dos Models
