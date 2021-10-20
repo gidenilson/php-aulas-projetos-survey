@@ -1,5 +1,9 @@
 Inicialização do projeto com o composer
 
+Estrutura de pastas
+-public
+-src
+
 Configuração no namespace PSR-4 no composer.json
 
 {
