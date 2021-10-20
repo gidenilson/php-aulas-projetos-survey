@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Vote extends Model
 {
 
-    protected $filable = ['option_id', 'email', 'verified'];
+    protected $fillable = ['option_id', 'email', 'verified'];
 
     public function option()
     {

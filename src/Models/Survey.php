@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Survey extends Model
 {
 
-    protected $filable = ['title', 'description'];
+    protected $fillable = ['title', 'description'];
 
     public function options()
     {
