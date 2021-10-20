@@ -2,15 +2,11 @@
 
 require __DIR__ . "../../vendor/autoload.php";
 
-session_start();
-
-// Create Router instance
+// Instanciamento do router
 $router = new \Bramus\Router\Router();
 
-// Define routes
+// Definição das rotas
 $router->get('/', 'App\Controllers\HomeController@index');
-$router->get('/login/{password}', 'App\Controllers\HomeController@login');
 
-
-// Run it!
+// Roda o router!
 $router->run();
