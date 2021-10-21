@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Option;
 use App\Models\Survey;
+use Illuminate\Support\Facades\DB;
 
 class SurveyController
 {
@@ -12,20 +13,17 @@ class SurveyController
     {
         $surveys = Survey::all();
         header('Content-Type: application/json');
-         echo json_encode($surveys);
+        echo json_encode($surveys);
     }
-    public function store(){
+    public function store()
+    {
         $survey = new Survey;
         $survey->title = $_REQUEST['title'];
         $survey->description = $_REQUEST['description'];
         $survey->multiple = $_REQUEST['multiple'];
         $survey->save();
-        
-        foreach($_REQUEST['option'] as $text){
-            $option = new Option;
-            $option->text = $text;
-            $survey->options()->save($option);
-        }
+
+        $this->updateOptions($survey, $_REQUEST['option']);
 
         $survey->save();
         $survey->refresh();
@@ -34,16 +32,20 @@ class SurveyController
         echo json_encode($survey);
     }
 
-    public function get($id){
+    public function get($id)
+    {
         $survey = Survey::find($id);
         header('Content-Type: application/json');
         echo json_encode($survey);
     }
 
-    public function update($id){
+    public function update($id)
+    {
         $survey = Survey::find($id);
 
-        foreach($_REQUEST as $field=>$value){
+        $this->updateOptions($survey, $_REQUEST['option']);
+
+        foreach ($_REQUEST as $field => $value) {
             $survey->$field = $value;
         }
 
@@ -52,16 +54,25 @@ class SurveyController
         echo json_encode($survey);
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $survey = Survey::find($id);
-        if($survey) {
+        if ($survey) {
             $survey->delete();
         }
 
 
         header('Content-Type: application/json');
         echo json_encode($survey);
-
     }
 
+    private function updateOptions($survey, $options)
+    {
+        DB::table('options')->where('survey_id', $survey->id)->delete();
+        foreach ($options as $text) {
+            $option = new Option;
+            $option->text = $text;
+            $survey->options()->save($option);
+        }
+    }
 }

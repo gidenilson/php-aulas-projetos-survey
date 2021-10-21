@@ -1,4 +1,2 @@
-Criação do SurveyController
-
-CRUD do survey
-Rotas do CRUD
+Aperfeiçoamento dos método update() e get() em SurveyController
+Aperfeiçoamento dos models

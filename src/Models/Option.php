@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Option extends Model
 {
 
-    protected $fillable = ['survey_id', 'text'];
+    protected $fillable = ['survey_id', 'text', 'email'];
+    protected $appends = ['votes'];
 
     public function survey()
     {
@@ -17,5 +18,9 @@ class Option extends Model
 
     public function votes(){
         return $this->hasMany(Vote::class);
+    }
+
+    public function getVotesAttribute(){
+        return $this->votes()->count();
     }
 }
