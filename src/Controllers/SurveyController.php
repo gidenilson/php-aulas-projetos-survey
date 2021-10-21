@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Option;
 use App\Models\Survey;
 
 class SurveyController
@@ -13,12 +14,21 @@ class SurveyController
         header('Content-Type: application/json');
          echo json_encode($surveys);
     }
-    public function storage(){
+    public function store(){
         $survey = new Survey;
         $survey->title = $_REQUEST['title'];
         $survey->description = $_REQUEST['description'];
         $survey->multiple = $_REQUEST['multiple'];
         $survey->save();
+        
+        foreach($_REQUEST['option'] as $text){
+            $option = new Option;
+            $option->text = $text;
+            $survey->options()->save($option);
+        }
+
+        $survey->save();
+        $survey->refresh();
 
         header('Content-Type: application/json');
         echo json_encode($survey);

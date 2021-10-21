@@ -30,7 +30,7 @@ $router = new \Bramus\Router\Router();
 // Define routes
 $router->get('/', 'App\Controllers\HomeController@index');
 $router->get('/survey', 'App\Controllers\SurveyController@index');
-$router->post('/survey/store', 'App\Controllers\SurveyController@storage');
+$router->post('/survey/store', 'App\Controllers\SurveyController@store');
 $router->get('/survey/{id}', 'App\Controllers\SurveyController@get');
 $router->post('/survey/{id}', 'App\Controllers\SurveyController@update');
 $router->delete('/survey/{id}', 'App\Controllers\SurveyController@delete');
