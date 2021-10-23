@@ -9,12 +9,6 @@ use App\Validators\Validator;
 class SurveyController
 {
 
-    private $validator;
-
-    public function __construct()
-    {
-        $this->validator = new Validator();
-    }
 
     public function index()
     {
@@ -25,20 +19,7 @@ class SurveyController
 
     public function store()
     {
-        $valid = $this->validator->validate($_REQUEST, [
-            'title' => 'required',
-            'description' => 'required',
-            'multiple' => 'required'
-        ]);
 
-        if (! $valid) {
-            $response = [
-                'message' => $this->validator->message
-            ];
-            header('Content-Type: application/json');
-            echo json_encode($response);
-            exit();
-        }
 
         $survey = new Survey();
         $survey->title = $_REQUEST['title'];
@@ -65,15 +46,6 @@ class SurveyController
     public function update($id)
     {
         $survey = Survey::find($id);
-
-        if (! $survey) {
-            $response = [
-                'message' => 'not found'
-            ];
-            header('Content-Type: application/json');
-            echo json_encode($response);
-            exit();
-        }
 
         $this->updateOptions($survey, $_REQUEST['option']);
 

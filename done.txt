@@ -1,5 +1,1 @@
-Validação dos dados do formulário
-Classe App\Validators\Validator
-Classe App\Validators\Required
-
-Atualização da rota store e update da survey
+Update das opções no SurveyController
