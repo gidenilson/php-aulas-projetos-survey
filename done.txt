@@ -1,2 +1,5 @@
-Aperfeiçoamento dos método update() e get() em SurveyController
-Aperfeiçoamento dos models
+Validação dos dados do formulário
+Classe App\Validators\Validator
+Classe App\Validators\Required
+
+Atualização da rota store e update da survey

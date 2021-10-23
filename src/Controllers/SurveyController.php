@@ -1,13 +1,20 @@
 <?php
-
 namespace App\Controllers;
 
 use App\Models\Option;
 use App\Models\Survey;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Capsule\Manager as DB;
+use App\Validators\Validator;
 
 class SurveyController
 {
+
+    private $validator;
+
+    public function __construct()
+    {
+        $this->validator = new Validator();
+    }
 
     public function index()
     {
@@ -15,9 +22,25 @@ class SurveyController
         header('Content-Type: application/json');
         echo json_encode($surveys);
     }
+
     public function store()
     {
-        $survey = new Survey;
+        $valid = $this->validator->validate($_REQUEST, [
+            'title' => 'required',
+            'description' => 'required',
+            'multiple' => 'required'
+        ]);
+
+        if (! $valid) {
+            $response = [
+                'message' => $this->validator->message
+            ];
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit();
+        }
+
+        $survey = new Survey();
         $survey->title = $_REQUEST['title'];
         $survey->description = $_REQUEST['description'];
         $survey->multiple = $_REQUEST['multiple'];
@@ -43,10 +66,21 @@ class SurveyController
     {
         $survey = Survey::find($id);
 
+        if (! $survey) {
+            $response = [
+                'message' => 'not found'
+            ];
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit();
+        }
+
         $this->updateOptions($survey, $_REQUEST['option']);
 
         foreach ($_REQUEST as $field => $value) {
-            $survey->$field = $value;
+            if(isset($survey->$field)){
+                $survey->$field = $value;
+            }            
         }
 
         $survey->save();
@@ -61,7 +95,6 @@ class SurveyController
             $survey->delete();
         }
 
-
         header('Content-Type: application/json');
         echo json_encode($survey);
     }
@@ -69,8 +102,9 @@ class SurveyController
     private function updateOptions($survey, $options)
     {
         DB::table('options')->where('survey_id', $survey->id)->delete();
+        
         foreach ($options as $text) {
-            $option = new Option;
+            $option = new Option();
             $option->text = $text;
             $survey->options()->save($option);
         }

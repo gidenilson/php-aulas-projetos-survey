@@ -1,17 +1,16 @@
 <?php
-
 require __DIR__ . "../../vendor/autoload.php";
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 
-$db = new Capsule;
+$db = new Capsule();
 
 $db->addConnection([
     'driver' => 'sqlite',
-    //'host' => 'localhost',
+    // 'host' => 'localhost',
     'database' => __DIR__ . "../../database.sqlite3",
-    //'username' => 'root',
-    //'password' => 'password',
+    // 'username' => 'root',
+    // 'password' => 'password',
     'charset' => 'utf8',
     'collation' => 'utf8_unicode_ci',
     'prefix' => ''
@@ -19,7 +18,6 @@ $db->addConnection([
 
 // Make this Capsule instance available globally via static methods
 $db->setAsGlobal();
-
 
 // Setup the Eloquent ORM...
 $db->bootEloquent();
@@ -30,12 +28,10 @@ $router = new \Bramus\Router\Router();
 // Define routes
 $router->get('/', 'App\Controllers\HomeController@index');
 $router->get('/survey', 'App\Controllers\SurveyController@index');
-$router->post('/survey/store', 'App\Controllers\SurveyController@store');
+$router->post('/survey', 'App\Controllers\SurveyController@store');
 $router->get('/survey/{id}', 'App\Controllers\SurveyController@get');
 $router->post('/survey/{id}', 'App\Controllers\SurveyController@update');
 $router->delete('/survey/{id}', 'App\Controllers\SurveyController@delete');
-
-
 
 // Run it!
 $router->run();
