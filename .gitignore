@@ -2,3 +2,6 @@
 composer.lock
 todo.txt
 vendor
+.buildpath
+.project
+.settings
