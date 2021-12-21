@@ -8,12 +8,11 @@ class Option extends Model
 
     protected $fillable = [
         'survey_id',
-        'text',
-        'email'
+        'text'
     ];
 
     protected $appends = [
-        'votes'
+        'votesCount'
     ];
 
     public function survey()
@@ -26,7 +25,7 @@ class Option extends Model
         return $this->hasMany(Vote::class);
     }
 
-    public function getVotesAttribute()
+    public function getVotesCountAttribute()
     {
         return $this->votes()->count();
     }
