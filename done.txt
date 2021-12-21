@@ -3,3 +3,7 @@ Classe App\Validators\Validator
 Classe App\Validators\Required
 
 Atualização da rota store e update da survey
+
+VoteController
+==============
+Método vote()

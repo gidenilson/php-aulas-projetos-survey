@@ -33,5 +33,7 @@ $router->get('/survey/{id}', 'App\Controllers\SurveyController@get');
 $router->post('/survey/{id}', 'App\Controllers\SurveyController@update');
 $router->delete('/survey/{id}', 'App\Controllers\SurveyController@delete');
 
+$router->post('/vote', 'App\Controllers\VoteController@vote');
+
 // Run it!
 $router->run();
