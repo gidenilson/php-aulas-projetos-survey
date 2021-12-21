@@ -28,7 +28,11 @@ class Survey extends Model
     {
         $emails = [];
         foreach ($this->options as $option) {
-            $emails[$option->email] = 1;
+            $votes = $option->votes;
+            foreach ($votes as $vote){
+                $emails[$vote->email] = 1;
+            }
+            
         }
         return (int) count($emails);
     }
